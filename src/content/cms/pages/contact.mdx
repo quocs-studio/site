@@ -1,0 +1,46 @@
+---
+title: Liên hệ
+date: 2020-05-02T22:00:00.000Z
+meta:
+  description: Bạn có ý tưởng về một dự án tuyệt vời và Quocs đang sẵn sàng lắng nghe về nó
+  ogImage: /assets/og.png
+  permalink: /contact/
+  title: Liên hệ
+blocks:
+  - title: Bạn có ý tưởng về một dự án tuyệt vời và Quocs đang sẵn sàng lắng nghe về nó
+    type: hero
+  - inputs:
+      - label: Họ và tên
+        name: name
+        required: true
+        type: text
+      - error: Địa chỉ email theo định dạng name@example.com
+        label: Địa chỉ email
+        name: email
+        required: true
+        type: email
+      - description: Hãy cố gắng trình bày ý tưởng, phác thảo các yêu cầu và phạm vi của dự án
+        label: Mô tả về dự án
+        name: specs
+        required: true
+        rows: 6
+        type: textarea
+      - description: "Không cần quá chính xác, chúng ta sẽ tính lại nó cùng nhau"
+        label: Ngân sách cho dự án
+        name: budget
+        options:
+          - label: "$500 – $1,000"
+            value: small
+          - label: "$1,000 – $2,500"
+            value: medium
+          - label: "$2,500+"
+            value: large
+        required: true
+        type: radio
+      - label: Gửi đi
+        name: submit
+        type: submit
+    success: >-
+      Rất hân hạnh khi nhận được liên hệ từ bạn. Chúng tôi sẽ liên lạc lại bạn sớm thôi, để mắt đến hộp thư nhé!
+    type: form
+---
