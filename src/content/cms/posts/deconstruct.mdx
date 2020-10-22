@@ -17,47 +17,47 @@ Vừa rồi, mình có một buổi tech talk ở công ty, với chủ đề kh
 
 Đó là một dự án mình cùng team thực hiện nhiều năm về trước. Lúc này, có hai module nằm ở hai file khác nhau. Và nhóm đang phát triển một tính năng mới ở một trong hai file. Mọi người phát hiện rằng tính năng này thật ra rất giống với một cái đã có sẵn ở file kia. Vậy nên tất cả quyết định sao chép đoạn code này bởi vì chúng gần như giống nhau.
 
-![alt text](/assets/posts/deconstruct-01.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-01.gif "Deconstruct")
 
 Mình nhận nhiệm vụ review qua đoạn code, sau khi đã đọc hết những sách về “best pratices”. Well Groomed Code, Pragmatic Programmer, Clean Coder… Và mình biết rằng không được copy-paste code vì việc này sẽ hình thành một **”maintenance burden”** và sẽ trở nên rất khó để tiếp tục phát triển. Mình cũng học được khái niệm **DRY**, viết tắt cho Don’t Repeat Yourself. Một quan niệm rất phổ biến từ khi vừa học lập trình: Không được để lặp code.
 
-![alt text](/assets/posts/deconstruct-dry.png "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-dry.png "Deconstruct")
 
 Vậy là mình cùng team đi đến quyết định tách đoạn mã ấy ra một module riêng để hai file này cùng phụ thuộc vào. Một **Abstraction** (lớp trừu tượng) được hình thành.
 
-![alt text](/assets/posts/deconstruct-02.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-02.gif "Deconstruct")
 
 Định nghĩa **Abstraction** ở đây, không quan trọng việc sử dụng ngôn ngữ nào. Nó có thể là một function, một class, hoặc một module, một package, miễn sao nó có thể reusable (tái sử dụng) ở bất kỳ đâu trong codebase.
 
 Mọi người đều cảm thấy hài lòng, và đã cùng nhau có một cuộc sống hạnh phúc…
 
-![alt text](/assets/posts/deconstruct-thumb.png "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-thumb.png "Deconstruct")
 
 Nhiều tháng sau, dự án nhận thêm một phase mới khi team đã không đụng vào source code này một khoảng thời gian. Trong đó có một feature cần một thứ gần tương tự như chiếc abstraction ngày xưa chúng tôi cùng theo đuổi. Lấy ví dụ như, abstraction ban đầu là một function chạy asynchronous (bất đồng bộ), và chúng ta cần một function có cấu trúc gần như tương tự, ngoại trừ việc nó có thể chạy synchronous.
 
-![alt text](/assets/posts/deconstruct-03.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-03.gif "Deconstruct")
 
 Vậy là dù ta không thể trực tiếp sử dụng đoạn code đó nữa, nhưng cũng sẽ không hay nếu mình copy-paste nó vì nó chẳng khác cái cũ là bao. Team quyết định hợp nhất hai phần và chỉnh sửa abstraction để nó có thể giải quyết cho tất cả trường hợp.
 
-![alt text](/assets/posts/deconstruct-04.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-04.gif "Deconstruct")
 
 Việc chỉnh sửa này làm cho abstraction có một chút kỳ cục, nhưng ít ra ta cũng không phải lặp lại đoạn code ấy?
 
-![alt text](/assets/posts/deconstruct-unorthodox.png "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-unorthodox.png "Deconstruct")
 
 Sau một thời gian ngắn chạy production, team phát hiện một bug trong feature mới này. Lỗi xuất phát từ việc ban đầu tất cả nghĩ rằng cả hai tính năng có vẻ giống nhau, nhưng thật ra chúng có một chút xíu khác biệt. Dĩ nhiên là mình có thể fix bug này, bằng cách thêm vào abstraction một case đặc biệt, kiểu như một câu if-else chẳng hạn. Nếu nó là case mới này, mình sẽ làm khác một chút, và mọi thứ trở lại hoạt động.
 
-![alt text](/assets/posts/deconstruct-05.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-05.gif "Deconstruct")
 
 Dễ thấy đây cũng là chuyện bình thường của một abstraction trong quá trình phát triển.
 
 Tiếp tục làm việc với feature này, nhóm phát hiện một lỗi mới trong một module cũ. Sự cố này xảy ra do hai trường hợp cũ mà chúng tôi nghĩ là giống nhau này thực ra cũng có chút khác biệt mà chỉ là team không nhận ra vào lúc đấy. Vậy nên chúng tôi thêm những đoạn patch khác cho các module vào abstraction.
 
-![alt text](/assets/posts/deconstruct-06.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-06.gif "Deconstruct")
 
 Lúc này, abstraction bắt đầu trở nên hơi hơi kỳ lạ và đáng sợ. Vậy nên hãy làm cho nó trở nên thân thiện hơn. Sao ta không đem hết những case đặc biệt này ra khỏi abstraction?
 
-![alt text](/assets/posts/deconstruct-07.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-07.gif "Deconstruct")
 
 Đúng vậy, ta kéo tất cả những patch case về lại nơi chúng thuộc về. Abstraction trở lại xinh đẹp và không còn dựa theo một trường hợp cụ thể nào, dù chẳng còn ai thực sự hiểu được nó đại diện cho cái gì nữa. Những module khi sử dụng abstraction đều phải được tham số hoá.
 
@@ -65,31 +65,31 @@ Sự tiến triển này diễn ra thực sự hoàn toàn bình thường, mỗ
 
 Rồi thời gian trôi qua, một số thành viên rời team, một số mới join team. Trải qua nhiều bản update & sửa lỗi. Ai đó sửa một lỗi nhỏ ở đây. Không cần biết cái này để làm gì nhưng tôi cần sửa nó một xíu, thêm tính năng mới kia, cải thiện vài chỉ số hiệu năng... Và ta kết thúc bằng một thứ giống như này:
 
-![alt text](/assets/posts/deconstruct-monster.jpeg "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-monster.jpeg "Deconstruct")
 
 Nhắc lại, mỗi giai đoạn phát triển độc lập có vẻ đều có lý cả. Nhưng chỉ cần quên đi mục đích ban đầu của toàn bộ quá trình, ta sẽ không nhận ra có những cyclical dependency đang hình thành, hay mấy dòng code kỳ lạ ở đâu đó, vì ta không còn nhìn thấy được bức tranh tổng thể nữa. Và dĩ nhiên, trong thực tế, đây cũng chính là nơi mà câu chuyện dừng lại. Không còn ai muốn đụng vô source code đó và nó bị vứt ở một xó, cho tới khi ai đó viết lại hết, rồi nhiều khi còn được tăng lương nữa, mình nghĩ vậy (haha).
 
 Nhưng nếu ta có một cỗ máy thời gian, sau khi tìm hiểu về vật lý lượng tử, các thứ nhiệt động lực học và đảo ngược entropy của vật chất 🤦 Mình quay lại quá khứ để sửa chữa những lỗi lầm xưa. Và mình muốn chọn thời điểm mà abstraction vẫn còn xinh tươi.
 
-![alt text](/assets/posts/deconstruct-the-past.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-the-past.gif "Deconstruct")
 
 Chúng tôi có trường hợp thứ ba này và không muốn phải duplicate đoạn code dù nó hơi khác một chút. Vậy nên chúng tôi đang chuẩn bị chỉnh sửa abstraction để đáp ứng với trường hợp mới. Nhưng nếu mình của ngày hôm nay có mặt ở đấy, mình sẽ nói với chính bản thân, hãy **inline abstraction** này!
 
-![alt text](/assets/posts/deconstruct-inline.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-inline.gif "Deconstruct")
 
 Nghĩa inline ở đây của mình là hãy copy-paste phần code về nơi cần dùng nó. Điều này gây ra một số sự trùng lặp nhưng sẽ tiêu diệt được con quái vật sắp được hình thành. Và dĩ nhiên sự duplicate là không hoàn hảo, nhưng wrong abstraction lại càng không tốt. Ta cần cân bằng được cả hai vấn đề.
 
 Cách mà hướng đi này giúp ta là bây giờ nếu tìm thấy bug và mình nhận ra chỗ này phải khác một chút, ta chỉ việc thay đổi nó mà không sợ làm ảnh hưởng đến những phần khác.
 
-![alt text](/assets/posts/deconstruct-inline-benefit.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-inline-benefit.gif "Deconstruct")
 
 Tên gọi cho cách làm này là **WET** solution, viết tắt cho "write every time", "write everything twice", hay "waste everyone's time", như một cách chơi chữ với DRY solution.
 
-![alt text](/assets/posts/deconstruct-wet.jpeg "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-wet.jpeg "Deconstruct")
 
 Tất nhiên mình không khuyến khích ta luôn copy paste mọi thứ. Trong tương lai, có thể ta nhận ra tất cả những mảnh ghép này hoàn toàn vừa khít cho một abstraction, hoặc ta ghép những mảnh khác lại thành một thứ mà ban đầu ta không nghĩ đó là một abstraction tốt. Có khi là một cái gì đó hoàn toàn khác biệt. Và tất cả những điều này mình đã chỉ có thể nhận ra trong quá trình thực tế, còn như khi mình được học, copy pasting là một phương pháp thực sự tiêu cực.
 
-![alt text](/assets/posts/deconstruct-best-practices.jpeg "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-best-practices.jpeg "Deconstruct")
 
 Lập trình viên học những best practices từ thế hệ trước và cố gắng làm theo chúng. Bởi vì có những vấn đề cụ thể và những giải pháp cụ thể được đưa ra bằng kinh nghiệm, nên các thế hệ tiếp theo cố gắng truyền đạt lại. Nhưng thật khó để có thể giải thích toàn bộ câu chuyện, vậy là chúng dần bị làm phẳng và hầu như ta chỉ còn tập trung vào những ý tưởng chung chung. Những mặt hạn chế, những lý do đưa đến giải pháp đấy, những trường hợp để sử dụng, hay có thể áp dụng đến đâu,... Tất cả dần mai một theo từng thế hệ, và ta thì vẫn cố gắng khuôn đúc vấn đề riêng của mình theo những best practices và anti-patterns này.
 
@@ -104,19 +104,19 @@ Dĩ nhiên là abstraction có ích. Cỗ máy tính của chúng ta thực ch�
 
 ### Focusing on intent
 
-![alt text](/assets/posts/deconstruct-focus-on-intent.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-focus-on-intent.gif "Deconstruct")
 
 Abstraction giúp ta tập trung vào một mục tiêu cụ thể. Lấy ví dụ một ứng dụng cần tính năng gửi email, và bạn không muốn phải biết một trăm năm mươi ba bước để gửi một cái email, mình cũng không biết mấy email đó được gửi thế nào. Nó vẫn còn là một bí ẩn tại sao chúng có thể thậm chí… tới được người nhận. Nhưng mình có thể dùng một thư viện nào đó để gọi hàm sendEmail và gần như chẳng cần phải quan tâm gì thêm.
 
 ### Code reuse
 
-![alt text](/assets/posts/deconstruct-code-reuse.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-code-reuse.gif "Deconstruct")
 
 Và một lợi ích phổ biến nữa của abstraction, tái sử dụng những đoạn code của bạn hay người khác mà không cần phải nhớ cách mà chúng hoạt động.
 
 ### Avoiding some bugs
 
-![alt text](/assets/posts/deconstruct-avoid-bugs.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-avoid-bugs.gif "Deconstruct")
 
 Những lớp abstraction này còn giúp ta tránh được một số bug. Ví dụ ta copy paste một đoạn code, sau đó phát hiện bug trong một phiên bản và fix nó, nhưng phiên bản còn lại vẫn bị lỗi và nhiều khi không được chú ý. Đây cũng là một luận điểm tại sao nên hạn chế để lặp code.
 
@@ -129,13 +129,13 @@ Nhưng khi nói đến lợi ích ta cũng nên nói về những hạn chế c�
 
 ### Accidental coupling
 
-![alt text](/assets/posts/deconstruct-accidential-coupling.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-accidential-coupling.gif "Deconstruct")
 
 Khi ta có hai module sử dụng chung abstraction, rồi sau đó phát hiện một module xảy ra lỗi, ta sẽ phải sửa lớp abstraction bởi đây mới là nơi của đoạn code. Nhưng bây giờ ta sẽ phải chịu trách nhiệm cân nhắc tất cả các module khác phụ thuộc vào lớp abstraction đấy để không làm xuất hiện những lỗi khác. Đây là một bất lợi thường thấy khi dùng abstraction, và chúng ta thường chịu sống chung với điều này, nhưng nó vẫn là một điểm bất lợi thực sự.
 
 ### Extra indirection
 
-![alt text](/assets/posts/deconstruct-extra-indirection.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-extra-indirection.gif "Deconstruct")
 
 Một hạn chế khác thậm chí còn tai hại hơn: những thứ dư thừa ta phải bận tâm mà abstraction có thể gây ra. Nghe có vẻ nghịch lý với một lợi ích vừa nãy, nhưng lời hứa hẹn “focusing on intent” để giúp ta không phải quan tâm đến những thứ không cần thiết liệu có hoàn toàn đúng? Mình chắc rằng hầu hết mọi người đều từng có một lỗi xuất hiện trong một feature, sau đó tìm ra nó nằm ở function khác, mà thực ra không phải, nó xuất hiện từ một module khác, nhưng rồi nhận ra nó phụ thuộc vào một lớp khác nữa.
 
@@ -146,19 +146,19 @@ Ta cố gắng để hạn chế những đoạn mã lặp mà ta nghĩ rằng x
 ### Inertia
 Ngoài vấn đề kỹ thuật, áp dụng sai abstraction còn gây ra ảnh hưởng xấu tới văn hoá làm việc của nhóm, sự chậm chạp và lười biếng.
 
-![alt text](/assets/posts/deconstruct.042.jpeg "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct.042.jpeg "Deconstruct")
 
 Ta bắt đầu một abstraction có vẻ đầy hứa hẹn, rồi theo thời gian nó càng trở nên phức tạp, nhưng không một ai có thời gian để gỡ rối hay viết lại nó, đặc biệt nếu như bạn mới tham gia vào dự án. Việc copy-paste có thể đơn giản, nhưng nếu bạn không quen thuộc với project từ đầu nó có thể trở nên cực kỳ khó khăn.
 
-![alt text](/assets/posts/deconstruct.043.jpeg "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct.043.jpeg "Deconstruct")
 
 Một điều nữa là chẳng ai trong chúng ta muốn trở thành người chỉ đưa ra những “worse practices”. Ai lại muốn nói, “hãy copy paste cái này?”, nhắm xem bạn có pass được probation ko? Vậy nên bạn học cách chấp nhận hiện tại rồi cứ tiếp tục và hy vọng đến một ngày không phải chịu trách nhiệm tới đống code ấy nữa.
 
-![alt text](/assets/posts/deconstruct.044.jpeg "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct.044.jpeg "Deconstruct")
 
 Và vấn đề là thậm chí cả nhóm đã đồng ý inline abstraction ấy, có khi đã quá muộn. Có thể bạn biết được mục đích và cách dùng của abstraction, và làm sao để test nó. Để khi tái cấu trúc hay phân tách chúng, bạn hiểu được cách xác thực những thay đổi mà không làm hư hỏng các phần khác. Nhưng có khi abstraction lúc này đã được phụ trách bởi các team khác, hay trải qua một thời gian không ai maintain, đến khi không còn ai biết cách test chỗ code này nữa.
 
-![alt text](/assets/posts/deconstruct-multiple-team.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-multiple-team.gif "Deconstruct")
 
 ## Abstract Responsibly
 Tất nhiên, sẽ thật phiến diện nếu nói rằng ta không nên tạo abstraction. Vấn đề ở đây là ta sẽ mắc những sai lầm, nhưng làm sao ta có thể giảm thiểu những hậu quả mà chúng gây ra:
@@ -172,11 +172,11 @@ Một bài học mình học được từ các dự án mã nguồn mở là h�
 
 Và theo mình thực ra đây là một ý tưởng tồi, bởi sau đó nếu bạn nhận ra đó là abstraction xấu và muốn inline chúng, thử nghĩ điều gì sẽ xảy đến với những test case này? Tất cả chúng đều fail. Và bạn sẽ phải: 1. revert lại vì bạn không muốn phải viết lại tất cả đoạn test; 2. chịu giảm code coverage, việc mà chắc chẳng ai muốn cả.
 
-![alt text](/assets/posts/deconstruct-wrong-test.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-wrong-test.gif "Deconstruct")
 
 Nhưng nếu ta lại có được cỗ máy thời gian để quay lại và viết test cho những chỗ thực sự cần quan tâm đến: Những test case cho chính feature phải hoàn thành và không liên quan đến abstraction. Việc này sẽ giúp ta tái cấu trúc abstraction dễ dàng, những test case này sẽ chỉ ra nếu đoạn code được refactor có hoạt động đúng.
 
-![alt text](/assets/posts/deconstruct-correct-test.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-correct-test.gif "Deconstruct")
 
 ### Delay adding layers
 Một yếu tố nữa, có thể bạn nhận được một pull request với vài đoạn code bị lặp và chỉ muốn bay vô xử đẹp hết? Hãy bình tĩnh!
@@ -186,18 +186,18 @@ Nghĩ như thế này, bạn bước vào thư viện và nhìn thấy cô gái 
 ### Be ready to inline it
 Và cuối cùng, cũng rất quan trọng, rằng nếu bạn mắc sai lầm, cái mà team cần học được là sự chấp nhận, rằng abstraction này đang gây ra tác động xấu và phải bị loại bỏ. Chúng ta không nên chỉ thêm abstraction, mà cũng phải xoá chúng khi cần thiết, nếu muốn xây dựng một quy trình phát triển lành mạnh. Điều đó có nghĩa là bạn hoàn toàn có thể để lại một bình luận như thế này và nói, ây, cái này đang vượt quá tầm kiểm soát:
 
-![alt text](/assets/posts/deconstruct-inline.jpeg "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-inline.jpeg "Deconstruct")
 
 Hãy dành một chút thời gian để copy-paste và sau đó ta sẽ tìm ra những gì cần làm tiếp theo.
 
 ### Plus
 Ngoài ra ta còn có một giải pháp về kỹ thuật cho vấn đề này. Nếu cấu trúc ứng dụng của bạn như thế này, cũng sẽ rất khó khăn để inline dù ta có muốn làm. Ví dụ như bạn copy và paste chỗ này, dẫn đến một số dữ liệu hay state dùng chung cũng bị duplicate, hoặc ta phải gỡ rối cho hết đống dependency rồi nối chúng lại với nhau. Và đây là một nhiệm vụ bất khả thi trong nhiều trường hợp.
 
-![alt text](/assets/posts/deconstruct-mess.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-mess.gif "Deconstruct")
 
 Cũng từ đấy theo mình, một điểm rất thông minh của React là giúp ta viết theo cấu trúc hình cây. Ta có một input component nằm trong một form component, được bao trong một screen component và tất cả được gộp lại trong app. Tất cả những luồng dữ liệu chỉ theo một hướng đi duy nhất, ta không phải lo lắng nếu mọi thứ phụ thuộc chéo lẫn nhau trong một vòng lặp vô tận…
 
-![alt text](/assets/posts/deconstruct-react.gif "Logo Title Text 1")
+![deconstruct](/assets/posts/deconstruct-react.gif "Deconstruct")
 
 Còn bởi vì nhờ các components và một số giải pháp như state management, ta có thể dễ dàng refactor các abstraction nếu muốn trước khi quá trễ. Đây là thứ ta có thể cân nhắc về cả hai mặt xã hội và công nghệ.
 ## Deconstruct
