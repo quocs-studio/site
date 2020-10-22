@@ -22,11 +22,13 @@ export const Article = styled.article`
     font-size: 3.5rem;
     font-weight: 600;
     line-height: 4rem;
-    margin: 8rem 0 1rem 0;
+    margin: 0rem 0 1rem 0;
   }
   & h3 {
     font-size: 3rem;
     font-weight: 600;
+    line-height: 3.5rem;
+    margin: 0rem 0 2rem 0;
   }
   & h4 {
     font-size: 2.75rem;
