@@ -95,7 +95,7 @@ Lập trình viên học những best practices từ thế hệ trước và c�
 
 Một cách để phá vỡ lối mòn này là khi ta truyền đạt lại cho thế hệ sau bài học nào đó, ta không nên phiến diện khẳng định đây là best practices hay đây là anti-patterns mà cần giải thích những điều gì cần phải đánh đổi, cả mặt lợi lẫn mặt hại.
 
-## Benefits of Abstraction
+## II. Benefits of Abstraction
 Dĩ nhiên là abstraction có ích. Cỗ máy tính của chúng ta thực chất cấu thành từ tầng tầng lớp lớp các abstraction lồng vào nhau. Những khái niệm cơ bản nhất của lập trình, **function**, **procedure**, cũng từ nó mà ra.
 
 * Focusing on intent
@@ -120,7 +120,7 @@ Và một lợi ích phổ biến nữa của abstraction, tái sử dụng nh�
 
 Những lớp abstraction này còn giúp ta tránh được một số bug. Ví dụ ta copy paste một đoạn code, sau đó phát hiện bug trong một phiên bản và fix nó, nhưng phiên bản còn lại vẫn bị lỗi và nhiều khi không được chú ý. Đây cũng là một luận điểm tại sao nên hạn chế để lặp code.
 
-## Costs of Abstraction
+## III. Costs of Abstraction
 Nhưng khi nói đến lợi ích ta cũng nên nói về những hạn chế của abstraction:
 
 * Accidental coupling
@@ -160,7 +160,7 @@ Và vấn đề là thậm chí cả nhóm đã đồng ý inline abstraction �
 
 ![deconstruct](/assets/posts/deconstruct-multiple-team.gif "Deconstruct")
 
-## Abstract Responsibly
+## IV. Abstract Responsibly
 Tất nhiên, sẽ thật phiến diện nếu nói rằng ta không nên tạo abstraction. Vấn đề ở đây là ta sẽ mắc những sai lầm, nhưng làm sao ta có thể giảm thiểu những hậu quả mà chúng gây ra:
 
 * Test concrete code
@@ -200,7 +200,7 @@ Cũng từ đấy theo mình, một điểm rất thông minh của React là gi
 ![deconstruct](/assets/posts/deconstruct-react.gif "Deconstruct")
 
 Còn bởi vì nhờ các components và một số giải pháp như state management, ta có thể dễ dàng refactor các abstraction nếu muốn trước khi quá trễ. Đây là thứ ta có thể cân nhắc về cả hai mặt xã hội và công nghệ.
-## Deconstruct
+## V. Deconstruct
 verb
 *ˌdiː.kənˈstrʌkt*
 
