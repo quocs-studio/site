@@ -21,7 +21,7 @@
     "@mdx-js/mdx": "^1.5.9",
     "@mdx-js/react": "^1.5.9",
     "eslint-plugin-react-hooks": "^3.0.0",
-    "gatsby": "2.20.29",
+    "gatsby": "4.25.7",
     "gatsby-plugin-google-analytics": "2.2.4",
     "gatsby-plugin-manifest": "2.3.6",
     "gatsby-plugin-mdx": "^1.1.10",
